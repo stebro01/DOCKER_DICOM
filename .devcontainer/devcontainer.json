@@ -1,0 +1,7 @@
+{
+    "name": "my-ubuntu-container",
+    "dockerFile": "../Dockerfile",
+    "context": "..",
+    "remoteUser": "jenai"
+  }
+  
