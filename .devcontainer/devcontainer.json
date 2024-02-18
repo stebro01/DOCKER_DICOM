@@ -1,7 +1,6 @@
 {
     "name": "my-ubuntu-container",
-    "dockerFile": "../Dockerfile",
-    "context": "..",
+    "workspaceFolder": "/home/jenai",
     "remoteUser": "jenai"
   }
   

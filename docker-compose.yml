@@ -3,11 +3,14 @@ version: '3.7'
 services:
   my-ubuntu-container:
     container_name: my-ubuntu-container
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
     command: sleep infinity
+    privileged: true
     volumes:
       - ./data:/home/jenai/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    # Optional: Wenn Sie Docker-Befehle direkt beim Start ausführen möchten, ersetzen Sie 'sleep infinity' durch Ihren Befehl.
+      # - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      DOCKER_TLS_CERTDIR: ''
