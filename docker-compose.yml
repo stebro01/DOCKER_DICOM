@@ -3,14 +3,14 @@ version: '3.7'
 services:
   my-ubuntu-container:
     container_name: my-ubuntu-container
-    platform: linux/amd64
+  #  platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
-    command: sleep infinity
-    privileged: true
+    #privileged: true
     volumes:
       - ./data:/home/jenai/data
-      # - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      DOCKER_TLS_CERTDIR: ''
+      - ../DICOM_REST_API:/home/jenai/data/DICOM_REST_API
+      - /var/run/docker.sock:/var/run/docker.sock 
+    ports:
+      - "22:22"

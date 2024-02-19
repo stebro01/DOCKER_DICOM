@@ -1,5 +1,5 @@
 # Base image
-FROM --platform=linux/amd64 ubuntu:20.04
+FROM ubuntu:20.04
 
 # Install Docker CE CLI
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common 
@@ -19,6 +19,12 @@ RUN curl -s https://deb.nodesource.com/setup_18.x | bash
 RUN apt-get install -y nodejs 
 RUN apt-get install -y sudo fuse-overlayfs
 
+# Set up configuration for SSH
+RUN apt install -y openssh-server
+RUN service ssh start
+#RUN mkdir /var/run/sshd
+
+
 # Nutzer jenai:users anlegen und standard shell auf bash setzen
 RUN useradd -m -s /bin/bash jenai
 
@@ -28,6 +34,6 @@ RUN usermod -aG docker jenai
 RUN echo "jenai:jenai" | chpasswd
 RUN echo "jenai ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
 
-# Set the working directory
-WORKDIR /home/jenai
-USER jenai
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
